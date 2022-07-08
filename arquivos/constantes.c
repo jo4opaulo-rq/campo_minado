@@ -1,4 +1,4 @@
-#include "constante.h"
+#include "constantes.h"
 
 const int LINHAS = 10;
 const int COLUNAS = 20;
