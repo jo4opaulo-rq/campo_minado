@@ -5,7 +5,7 @@
 #include "funcoes.h"
 
 int main(){
-    exibirCampo();
+    
 
     return 0;
 }
