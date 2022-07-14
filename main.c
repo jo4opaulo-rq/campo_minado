@@ -38,7 +38,7 @@ void gerarMinas(){
 }
 
 void preencherVizinhos(){
-
+    
 }
 
 void exibirCampoAtual(){
