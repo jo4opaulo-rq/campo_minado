@@ -22,7 +22,22 @@ void inicializarCampo(){
     }
 }
 
-void geraMinas(){
+void gerarMinas(){
+    srand(time(NULL));
+    int vetL;
+    int vetC;
+
+    for(int i=0; i<minas; i++){
+        vetL = rand() % 10; 
+        vetC = rand() % 20; 
+        if(campo[vetL][vetC].eMina == 0)
+            campo[vetL][vetC].eMina = 1;
+        else
+            i--;
+    }
+}
+
+void preencherVizinhos(){
 
 }
 
@@ -32,7 +47,7 @@ void exibirCampoAtual(){
         printf("  -----------------------------------------------------------------------------------------------------\n");
         printf("%d |", i);
         for(int j=0; j<c; j++){
-            printf("   |");
+            printf("  %d|", campo[i][j].eMina);
         }
         printf("\n");
     }
@@ -43,7 +58,7 @@ void exibirCampoAtual(){
 
 int main(){
     inicializarCampo();
-
+    gerarMinas();
     exibirCampoAtual();
     
     return 0;
