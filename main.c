@@ -8,11 +8,8 @@ typedef struct {
     int posVazia;
 }Celula;
 
-Celula campo[10][20];
-int l = 10, c = 20;
-int minas = 40;
 
-void inicializarCampo(){
+void inicializarCampo(int l, int c, int campo[10][20].eMina){
     for(int i=0; i<l; i++){
         for(int j=0; j<c; j++){
             campo[i][j].eMina = 0;
@@ -57,7 +54,11 @@ void exibirCampoAtual(){
 
 
 int main(){
-    inicializarCampo();
+    Celula campo[10][20];
+    int l = 10, c = 20;
+    int minas = 40;
+
+    inicializarCampo(l, c, campo[l][c].eMina);
     gerarMinas();
     exibirCampoAtual();
     
