@@ -43,7 +43,7 @@ void exibirCampoAtual(int l, int c, Celula campo[l][c]){
     for(int i=0; i<l; i++){
         printf("  -----------------------------------------------------------------------------------------------------\n");
         printf("%d |", i);
-        for(int j=0; j<c; j++){
+        for(int j=0; j<25; j++){ //coloquei 25 pq completou a matriz
             printf("   |");
         }
         printf("\n");
@@ -54,8 +54,9 @@ void exibirCampoAtual(int l, int c, Celula campo[l][c]){
 
 
 int main(){
-    Celula campo[10];
     int l = 10, c = 20;
+    Celula campo[l][c];
+    
     int minas = 40;
 
     inicializarCampo(l, c, campo);
