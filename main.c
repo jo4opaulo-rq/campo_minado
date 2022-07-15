@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+// Tamanho fixo de linha e coluna
+#define TamL 10
+#define TamC 20
 typedef struct {
     int eMina;
     int vizinhos;
@@ -33,9 +35,42 @@ void gerarMinas(int l, int c, Celula campo[l][c], int minas){
             i--;
     }
 }
+// Verificar se a coordena é válida ou não
+int coordenaValida(int l, int c){
+    if(l >= 0 && l < TamL && c >= 0 && c < TamC){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+int quantMinasVizinhas(int l, int c, Celula campo[l][c]){
+    int quantMina = 0;
+    if(coordenaValida(l - 1, c) && campo[l-1][c].eMina){
+        quantMina ++;
+    }
+    if(coordenaValida(l + 1, c) && campo[l+1][c].eMina){
+        quantMina ++;
+    }
+    if(coordenaValida(l, c + 1) && campo[l][c+1].eMina){
+        quantMina ++;
+    }
+    if(coordenaValida(l, c - 1) && campo[l][c-1].eMina){
+        quantMina ++;
+    }
+    return quantMina;
+}
 
-void preencherVizinhos(){
-    
+
+
+// não sei se é a função correta
+void preencherVizinhos(Celula campo[TamL][TamC]){
+    for(int l = 0; l < TamL; l++){
+        for (int c = 0; c < TamC; c++)
+            campo[l][c].vizinhos = quantMinasVizinhas(l, c, campo);
+
+        
+    }
 }
 
 void exibirCampoAtual(int l, int c, Celula campo[l][c]){
@@ -62,6 +97,7 @@ int main(){
     inicializarCampo(l, c, campo);
     gerarMinas(l, c, campo, minas);
     exibirCampoAtual(l, c, campo);
+    preencherVizinhos(campo);
     
     return 0;
 }
