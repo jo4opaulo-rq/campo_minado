@@ -2,9 +2,9 @@
 #define ESTRUTURAS_H_
 
 typedef struct {
-  int eBomba;
-  int estaAberta;
-  int vizinhos;
-} Celula;
+    int eMina;
+    int vizinhos;
+    int posAberta;
+}Celula;
 
 #endif
