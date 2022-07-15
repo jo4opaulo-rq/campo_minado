@@ -74,9 +74,15 @@ void preencherVizinhos(Celula campo[TamL][TamC]){
 }
 
 void exibirCampoAtual(int l, int c, Celula campo[l][c]){
-    printf("    0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19\n");
+    printf("  |");
+    for(int i=0; i<c; i++)
+        if(i < 10)
+            printf(" %d  |", i);
+        else    
+            printf(" %d |", i);
+    printf("\n");
     for(int i=0; i<l; i++){
-        printf("  -----------------------------------------------------------------------------------------------------\n");
+        printf("-------------------------------------------------------------------------------------------------------\n");
         printf("%d |", i);
         for(int j=0; j<c; j++){ 
             if(campo[i][j].posAberta){
