@@ -7,7 +7,7 @@
 typedef struct {
     int eMina;
     int vizinhos;
-    int posVazia;
+    int posAberta;
 }Celula;
 
 
@@ -16,7 +16,7 @@ void inicializarCampo(int l, int c, Celula campo[l][c]){
         for(int j=0; j<c; j++){
             campo[i][j].eMina = 0;
             campo[i][j].vizinhos= 0;
-            campo[i][j].posVazia = 0;
+            campo[i][j].posAberta = 0;
         }
     }
 }
@@ -78,8 +78,17 @@ void exibirCampoAtual(int l, int c, Celula campo[l][c]){
     for(int i=0; i<l; i++){
         printf("  -----------------------------------------------------------------------------------------------------\n");
         printf("%d |", i);
-        for(int j=0; j<25; j++){ //coloquei 25 pq completou a matriz
-            printf("   |");
+        for(int j=0; j<c; j++){ 
+            if(campo[i][j].posAberta){
+                if(campo[i][j].eMina)
+                    printf(" *  |");
+                else   
+                    printf(" %d  |", campo[i][j].vizinhos); 
+
+            }
+            else{
+                printf("    |");
+            }
         }
         printf("\n");
     }
@@ -96,8 +105,7 @@ int main(){
 
     inicializarCampo(l, c, campo);
     gerarMinas(l, c, campo, minas);
-    exibirCampoAtual(l, c, campo);
     preencherVizinhos(campo);
-    
+    exibirCampoAtual(l, c, campo);
     return 0;
 }
