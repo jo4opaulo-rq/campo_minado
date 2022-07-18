@@ -56,9 +56,6 @@ int quantMinasVizinhas(int l, int c, Celula campo[l][c]){
     return quantMina;
 }
 
-
-
-// não sei se é a função correta
 void preencherVizinhos(Celula campo[TamL][TamC]){
     for(int l = 0; l < TamL; l++){
         for (int c = 0; c < TamC; c++)
@@ -68,17 +65,48 @@ void preencherVizinhos(Celula campo[TamL][TamC]){
     }
 }
 
+void abrirCoordenada(int l, int c, Celula campo[TamL][TamC]){
+    campo[l][c].posAberta = 1;
+    
+    if(coordenaValida(l, c) == 1 && campo[l][c].posAberta == 0){
+        if(campo[l][c].vizinhos == 0){
+            abrirCoordenada(l-1, c, campo);
+            abrirCoordenada(l+1, c, campo);
+            abrirCoordenada(l, c-1, campo);
+            abrirCoordenada(l, c+1, campo);
+        }
+    }
+}   
+
+
+void jogar(Celula campo[TamL][TamC]){
+    int linha, coluna;
+
+    do{
+        printf("\nDigite o número da linha e da coluna: ");
+        scanf("%d %d", &linha, &coluna);
+        
+        if(coordenaValida(linha, coluna) == 0){
+            printf("\nCoordenada inválida");
+        }
+    }while(coordenaValida(linha, coluna) == 0 || campo[linha][coluna].posAberta == 1);
+
+    abrirCoordenada(linha, coluna, campo);
+        
+}
+
 void exibirCampoAtual(int l, int c, Celula campo[l][c]){
-    printf("  |");
+    printf("\n\n\t  |");
     for(int i=0; i<c; i++)
         if(i < 10)
             printf(" %d  |", i);
         else    
             printf(" %d |", i);
     printf("\n");
+
     for(int i=0; i<l; i++){
-        printf("-------------------------------------------------------------------------------------------------------\n");
-        printf("%d |", i);
+        printf("\t-------------------------------------------------------------------------------------------------------\n");
+        printf("\t%d |", i);
         for(int j=0; j<c; j++){ 
             if(campo[i][j].posAberta){
                 if(campo[i][j].eMina)
@@ -93,5 +121,6 @@ void exibirCampoAtual(int l, int c, Celula campo[l][c]){
         }
         printf("\n");
     }
-    printf("  -----------------------------------------------------------------------------------------------------\n");
+
+    printf("\t-------------------------------------------------------------------------------------------------------\n");
 }

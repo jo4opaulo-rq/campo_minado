@@ -5,6 +5,8 @@ void inicializarCampo();
 void gerarMinas();
 void preencherVizinhos();
 void exibirCampoAtual();
+void jogar();
+void abrirCoordenada();
 int coordenaValida();
 int quantMinasVizinhas();
 
