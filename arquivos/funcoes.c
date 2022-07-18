@@ -66,9 +66,8 @@ void preencherVizinhos(Celula campo[TamL][TamC]){
 }
 
 void abrirCoordenada(int l, int c, Celula campo[TamL][TamC]){
-    campo[l][c].posAberta = 1;
-    
     if(coordenaValida(l, c) == 1 && campo[l][c].posAberta == 0){
+        campo[l][c].posAberta = 1;
         if(campo[l][c].vizinhos == 0){
             abrirCoordenada(l-1, c, campo);
             abrirCoordenada(l+1, c, campo);

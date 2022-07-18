@@ -12,11 +12,33 @@ int main(){
     Celula campo[10][20];
     
     int minas = 40;
+    int modoJogo;
+    int opcao;
 
-    inicializarCampo(TamL, TamC, campo);
-    gerarMinas(TamL, TamC, campo, minas);
-    preencherVizinhos(campo);
-    exibirCampoAtual(TamL, TamC, campo);
-    jogar(campo);
+    printf("Escolha o modo de jogo:\n");
+    printf("1- Modo clássico\n");
+    printf("2- Modo autómo\n");
+    scanf("%d", modoJogo);
+
+    if(modoJogo == 1){
+        printf("\nDigite 1 para jogar: ");
+        printf("\nDigite 2 para pedir ajuda: ");
+        scanf("%d", opcao);
+        while(opcao == 1){
+            inicializarCampo(TamL, TamC, campo);
+            gerarMinas(TamL, TamC, campo, minas);
+            preencherVizinhos(campo);
+            jogar(campo);
+
+            printf("\nDigite 1 para jogar novamente: ");
+            printf("\nDigite 2 para pedir ajuda: ");
+            scanf("%d", opcao);
+        }
+    }
+    
+        
+
+       
+
     return 0;
 }
