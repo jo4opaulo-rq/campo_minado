@@ -17,15 +17,14 @@ int main(){
 
     printf("Escolha o modo de jogo:\n");
     printf("1- Modo clássico\n");
-    printf("2- Modo autómo\n");
+    printf("2- Modo autônomo\n");
     printf("Modo: ");
     scanf("%d", &modoJogo);
     if(modoJogo == 1){
         printf("\nDigite 1 para jogar: ");
-        printf("\nDigite 2 para pedir ajuda:");
+        printf("\nDigite 2 para pedir ajuda:\n");
         scanf("%d", &opcao);
         while(opcao == 1){
-            printf("Foi?");
             inicializarCampo(TamL, TamC, campo);
             gerarMinas(TamL, TamC, campo, minas);
             preencherVizinhos(campo);

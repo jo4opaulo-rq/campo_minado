@@ -7,6 +7,7 @@ void preencherVizinhos();
 void exibirCampoAtual();
 void jogar();
 void abrirCoordenada();
+int verificaVitoria();
 int coordenaValida();
 int quantMinasVizinhas();
 

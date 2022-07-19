@@ -77,22 +77,21 @@ void abrirCoordenada(int l, int c, Celula campo[TamL][TamC]){
     }
 }   
 
+int verificaVitoria(Celula campo[TamC][TamL]){
+    int n=0;
 
-void jogar(Celula campo[TamL][TamC]){
-    int linha, coluna;
-
-    do{
-        printf("\nDigite o número da linha e da coluna: ");
-        scanf("%d %d", &linha, &coluna);
-        
-        if(coordenaValida(linha, coluna) == 0){
-            printf("\nCoordenada inválida");
+    for(int i=0; i<TamC; i++){
+        for(int j=0; j<TamC; j++){
+            if(campo[i][j].posAberta == 0 && campo[i][j].eMina == 0)
+                n++;
         }
-    }while(coordenaValida(linha, coluna) == 0 || campo[linha][coluna].posAberta == 1);
-
-    abrirCoordenada(linha, coluna, campo);
-        
+    }
+    return n;
 }
+
+
+
+    
 
 void exibirCampoAtual(int l, int c, Celula campo[l][c]){
     printf("\n\n\t  |");
@@ -122,4 +121,28 @@ void exibirCampoAtual(int l, int c, Celula campo[l][c]){
     }
 
     printf("\t-------------------------------------------------------------------------------------------------------\n");
+}
+
+void jogar(Celula campo[TamL][TamC]){
+    int linha, coluna;
+    do{
+        exibirCampoAtual(TamL, TamC, campo);
+        do{
+            printf("\nDigite o número da linha e da coluna: ");
+            scanf("%d %d", &linha, &coluna);
+            
+            if(coordenaValida(linha, coluna) == 0){
+                printf("\nCoordenada inválida");
+            }
+        }while(coordenaValida(linha, coluna) == 0 || campo[linha][coluna].posAberta == 1);
+
+        abrirCoordenada(linha, coluna, campo);
+    }while(verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
+
+    if(campo[linha][coluna].eMina == 1){
+        printf("RIPASTES!\n");
+    }
+    else{
+        printf("GANHASTES!\n");
+    }
 }
