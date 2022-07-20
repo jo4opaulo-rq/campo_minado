@@ -4,6 +4,7 @@
 
 extern const int TamL;
 extern const int TamC;
+extern const int minas;
 
 
 #endif

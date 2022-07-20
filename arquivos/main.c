@@ -11,7 +11,6 @@
 int main(){
     Celula campo[10][20];
     
-    int minas = 40;
     int modoJogo;
     int opcao;
 
@@ -25,8 +24,8 @@ int main(){
         printf("\nDigite 2 para pedir ajuda:\n");
         scanf("%d", &opcao);
         while(opcao == 1){
-            inicializarCampo(TamL, TamC, campo);
-            gerarMinas(TamL, TamC, campo, minas);
+            inicializarCampo(campo);
+            gerarMinas(campo);
             preencherVizinhos(campo);
             jogar(campo);
 
@@ -35,10 +34,6 @@ int main(){
             scanf("%d", &opcao);
         }
     }
-    
-        
-
-       
-
+    // gcc -o main main.c funcoes.c constantes.c
     return 0;
 }
