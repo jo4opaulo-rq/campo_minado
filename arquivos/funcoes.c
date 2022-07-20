@@ -106,7 +106,7 @@ void exibirCampoAtual(int l, int c, Celula campo[l][c]){
         for(int j=0; j<c; j++){ 
             if(campo[i][j].posAberta){
                 if(campo[i][j].eMina)
-                    printf(" *  |");
+                    printf(" \U0001f4a3  |");
                 else if(campo[i][j].vizinhos)
                     printf(" %d  |", campo[i][j].vizinhos); 
 
