@@ -123,9 +123,11 @@ void exibirCampoAtual(int l, int c, Celula campo[l][c]){
 
 void jogar(Celula campo[TamL][TamC]){
     int linha, coluna, escolha=1, i=0;
-    
+    time_t inicio;
+    time_t meio;
+
+    exibirCampoAtual(TamL, TamC, campo);
     do{
-        exibirCampoAtual(TamL, TamC, campo);
         do{
             printf("\nEscolha o que deseja fazer: \n");
             printf("1- Revelar uma célula\n");
@@ -149,13 +151,20 @@ void jogar(Celula campo[TamL][TamC]){
             }
             }while(coordenaValida(linha, coluna) == 0 || campo[linha][coluna].posAberta == 1);
         }
+        if(i<1)
+            inicio = time(NULL);
+            i++;
+
         if(escolha == 2){
             
         }
         if(escolha == 3){
-            
+            meio = time(NULL);
+            printf("Tempo Total: %ld Segundos\n", (meio - inicio));
+
         }
         abrirCoordenada(linha, coluna, campo);
+        exibirCampoAtual(TamL, TamC, campo);
     }while(verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
     
     if(campo[linha][coluna].eMina == 1){
@@ -166,4 +175,7 @@ void jogar(Celula campo[TamL][TamC]){
         exibirCampoAtual(TamL, TamC, campo);
         printf("\n\n\tGANHOU!\n");
     }
+
+    time_t fim = time(NULL);
+    printf("Tempo Total: %ld Segundos\n", (fim - inicio));
 }

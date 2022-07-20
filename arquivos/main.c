@@ -20,14 +20,17 @@ int main(){
     printf("Modo: ");
     scanf("%d", &modoJogo);
     if(modoJogo == 1){
-        inicializarCampo(campo);
-        gerarMinas(campo);
-        preencherVizinhos(campo);
-        jogar(campo);
+        do{
+            inicializarCampo(campo);
+            gerarMinas(campo);
+            preencherVizinhos(campo);
+            jogar(campo);
 
-        printf("\nDigite 1 para jogar novamente: ");
-        printf("\nDigite 2 para pedir ajuda: \n");
-        scanf("%d", &opcao);  
+            printf("\nDigite 1 para jogar novamente: ");
+            printf("\nDigite 2 para pedir ajuda: \n");
+            scanf("%d", &opcao);
+        }while(opcao == 1);
+          
     }
            
     
