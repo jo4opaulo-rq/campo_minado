@@ -122,13 +122,13 @@ void exibirCampoAtual(int l, int c, Celula campo[l][c]){
 }
 
 void jogar(Celula campo[TamL][TamC]){
-    int linha, coluna, escolha=1;
-
+    int linha, coluna, escolha=1, i=0;
+    
     do{
         exibirCampoAtual(TamL, TamC, campo);
         if(escolha > 3 || escolha < 1){
                 printf("\n------Opção Inválida!------\n");
-                printf("---Digite novamente!---\n");
+                printf("  ---Digite novamente!---\n");
             }
         do{
             printf("\nEscolha o que deseja fazer: \n");
@@ -138,7 +138,7 @@ void jogar(Celula campo[TamL][TamC]){
             printf("Opção: ");
             scanf("%d", &escolha);
         }while(escolha > 3 && escolha < 1);
-            
+        
 
         if(escolha == 1){
             do{
@@ -152,7 +152,7 @@ void jogar(Celula campo[TamL][TamC]){
         }
         abrirCoordenada(linha, coluna, campo);
     }while(verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
-
+    
     if(campo[linha][coluna].eMina == 1){
         exibirCampoAtual(TamL, TamC, campo);
         printf("\n\n\tPERDEU!\n");

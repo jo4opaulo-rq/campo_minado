@@ -20,25 +20,17 @@ int main(){
     printf("Modo: ");
     scanf("%d", &modoJogo);
     if(modoJogo == 1){
-        printf("\nDigite 1 para jogar: ");
-        printf("\nDigite 2 para pedir ajuda: \n");
-        printf("Modo: ");
-        scanf("%d", &opcao);
-        if(opcao == 1){
-            while(opcao == 1){
-            inicializarCampo(campo);
-            gerarMinas(campo);
-            preencherVizinhos(campo);
-            jogar(campo);
+        inicializarCampo(campo);
+        gerarMinas(campo);
+        preencherVizinhos(campo);
+        jogar(campo);
 
-            printf("\nDigite 1 para jogar novamente: ");
-            printf("\nDigite 2 para pedir ajuda: \n");
-            scanf("%d", &opcao);
-            }
-        }
-        printf("ok");
-           
+        printf("\nDigite 1 para jogar novamente: ");
+        printf("\nDigite 2 para pedir ajuda: \n");
+        scanf("%d", &opcao);  
     }
+           
+    
     // gcc -o main main.c funcoes.c constantes.c
     return 0;
 }
