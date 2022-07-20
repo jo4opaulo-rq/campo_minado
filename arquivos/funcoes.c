@@ -126,10 +126,6 @@ void jogar(Celula campo[TamL][TamC]){
     
     do{
         exibirCampoAtual(TamL, TamC, campo);
-        if(escolha > 3 || escolha < 1){
-                printf("\n------Opção Inválida!------\n");
-                printf("  ---Digite novamente!---\n");
-            }
         do{
             printf("\nEscolha o que deseja fazer: \n");
             printf("1- Revelar uma célula\n");
@@ -137,8 +133,11 @@ void jogar(Celula campo[TamL][TamC]){
             printf("3- Mostrar tempo decorrido\n");
             printf("Opção: ");
             scanf("%d", &escolha);
-        }while(escolha > 3 && escolha < 1);
-        
+            if(escolha > 3 || escolha < 1){
+                printf("\n------Opção Inválida!------\n");
+                printf("  ---Digite novamente!---\n");
+            }
+        }while(escolha > 3 || escolha < 1);
 
         if(escolha == 1){
             do{
@@ -149,6 +148,12 @@ void jogar(Celula campo[TamL][TamC]){
                     printf("\nCoordenada inválida\n");
             }
             }while(coordenaValida(linha, coluna) == 0 || campo[linha][coluna].posAberta == 1);
+        }
+        if(escolha == 2){
+            
+        }
+        if(escolha == 3){
+            
         }
         abrirCoordenada(linha, coluna, campo);
     }while(verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
