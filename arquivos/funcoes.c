@@ -122,27 +122,43 @@ void exibirCampoAtual(int l, int c, Celula campo[l][c]){
 }
 
 void jogar(Celula campo[TamL][TamC]){
-    int linha, coluna;
+    int linha, coluna, escolha=1;
+
     do{
         exibirCampoAtual(TamL, TamC, campo);
-        do{
-            printf("\nDigite o número da linha e da coluna: ");
-            scanf("%d %d", &linha, &coluna);
-            
-            if(coordenaValida(linha, coluna) == 0){
-                printf("\nCoordenada inválida\n");
+        if(escolha > 3 || escolha < 1){
+                printf("\n------Opção Inválida!------\n");
+                printf("---Digite novamente!---\n");
             }
-        }while(coordenaValida(linha, coluna) == 0 || campo[linha][coluna].posAberta == 1);
+        do{
+            printf("\nEscolha o que deseja fazer: \n");
+            printf("1- Revelar uma célula\n");
+            printf("2- Pedir ajuda\n");
+            printf("3- Mostrar tempo decorrido\n");
+            printf("Opção: ");
+            scanf("%d", &escolha);
+        }while(escolha > 3 && escolha < 1);
+            
 
+        if(escolha == 1){
+            do{
+                printf("\nDigite o número da linha e da coluna: ");
+                scanf("%d %d", &linha, &coluna);
+                
+                if(coordenaValida(linha, coluna) == 0){
+                    printf("\nCoordenada inválida\n");
+            }
+            }while(coordenaValida(linha, coluna) == 0 || campo[linha][coluna].posAberta == 1);
+        }
         abrirCoordenada(linha, coluna, campo);
     }while(verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
 
     if(campo[linha][coluna].eMina == 1){
         exibirCampoAtual(TamL, TamC, campo);
-        printf("\n\n\tRIPASTES!\n");
+        printf("\n\n\tPERDEU!\n");
     }
     else{
         exibirCampoAtual(TamL, TamC, campo);
-        printf("\n\n\tGANHASTES!\n");
+        printf("\n\n\tGANHOU!\n");
     }
 }
