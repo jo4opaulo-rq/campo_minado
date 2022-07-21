@@ -13,9 +13,11 @@ int main(){
     time_t inicio;
     time_t meio;
     time_t fim;
+    time_t total;
     
     int modoJogo;
     int opcao;
+    
 
     do{
         printf("\n\nEscolha o modo de jogo:\n");
@@ -32,7 +34,7 @@ int main(){
 
                 do{
                     printf("\n1- Jogar Novamente: ");
-                    printf("\n2- Mostrar Ranking\n");
+                    printf("\n2- Mostrar Tempos\n");
                     printf("3- Trocar Modo\n");
                     printf("4- Sair\n");
                     printf("\nOpção: ");
