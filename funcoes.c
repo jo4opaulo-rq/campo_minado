@@ -54,16 +54,16 @@ int quantMinasVizinhas(int l, int c, Celula campo[TamL][TamC]){
     if(coordenaValida(l, c - 1) && campo[l][c-1].eMina){ //horizontal
         quantMina ++;
     }
-    if(coordenaValida(l - 1, c - 1) && campo[l-1][c-1].eMina){ //Diagonais
+    if(coordenaValida(l - 1, c - 1) && campo[l-1][c-1].eMina){ //Diagonal
         quantMina ++;
     }
-    if(coordenaValida(l - 1, c + 1) && campo[l-1][c+1].eMina){ //Diagonais
+    if(coordenaValida(l - 1, c + 1) && campo[l-1][c+1].eMina){ //Diagonal
         quantMina ++;
     }
-    if(coordenaValida(l + 1, c - 1) && campo[l+1][c-1].eMina){ //Diagonais
+    if(coordenaValida(l + 1, c - 1) && campo[l+1][c-1].eMina){ //Diagonal
         quantMina ++;
     }
-    if(coordenaValida(l + 1, c + 1) && campo[l+1][c+1].eMina){ //Diagonais
+    if(coordenaValida(l + 1, c + 1) && campo[l+1][c+1].eMina){ //Diagonal
         quantMina ++;
     }
     return quantMina;
@@ -134,7 +134,6 @@ void exibirCampoAtual(Celula campo[TamL][TamC]){
     printf("\t  -----------------------------------------------------------------------------------------------------\n");
 }
 
-
 void jogar(Celula campo[TamL][TamC]){
     int linha, coluna, escolha=1, i=0;
     time_t inicio;
@@ -195,3 +194,4 @@ void jogar(Celula campo[TamL][TamC]){
     fim = time(NULL);
     printf("Tempo Total Jogado: %ld Segundos\n", (fim - inicio));
 }
+

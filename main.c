@@ -14,24 +14,33 @@ int main(){
     int modoJogo;
     int opcao;
 
-    printf("Escolha o modo de jogo:\n");
-    printf("1- Modo clássico\n");
-    printf("2- Modo autônomo\n");
-    printf("Modo: ");
-    scanf("%d", &modoJogo);
-    if(modoJogo == 1){
-        do{
-            inicializarCampo(campo);
-            gerarMinas(campo);
-            preencherVizinhos(campo);
-            jogar(campo);
+    do{
+        printf("\n\nEscolha o modo de jogo:\n");
+        printf("1- Modo clássico\n");
+        printf("2- Modo autônomo\n");
+        printf("Modo: ");
+        scanf("%d", &modoJogo);
+        if(modoJogo == 1){
+            do{
+                inicializarCampo(campo);
+                gerarMinas(campo);
+                preencherVizinhos(campo);
+                jogar(campo);
 
-            printf("\nDigite 1 para jogar novamente: ");
-            printf("\nDigite 2 para pedir ajuda: \n");
-            scanf("%d", &opcao);
-        }while(opcao == 1);
-          
-    }
+                printf("\n1- Jogar Novamente: ");
+                printf("\n2- Mostrar Ranking\n");
+                printf("3- Trocar Modo\n");
+                printf("4- Sair\n");
+                printf("Opção: ");
+                scanf("%d", &opcao);
+
+            }while(opcao != 4 && opcao !=3);
+            
+        }
+        if(modoJogo == 2){
+        }
+
+    }while(opcao != 4 && (opcao > 1 && opcao < 5));
            
     
     // gcc -o main main.c funcoes.c constantes.c
