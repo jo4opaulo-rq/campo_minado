@@ -15,8 +15,8 @@ void inicializarCampo(Celula campo[TamL][TamC]){
         }
     }
 }
-// Adiciona as minas ao campo
-void gerarMinas(Celula campo[TamC][TamL]){
+
+void gerarMinas(Celula campo[TamL][TamC]){
     srand(time(NULL));
     int linha;
     int coluna;
@@ -24,8 +24,9 @@ void gerarMinas(Celula campo[TamC][TamL]){
     for(int i=0; i<minas; i++){
         linha = rand() % 10; 
         coluna = rand() % 20; 
-        if(campo[linha][coluna].eMina == 0)
+        if(campo[linha][coluna].eMina == 0){
             campo[linha][coluna].eMina = 1;
+        }
         else
             i--;
     }
@@ -39,7 +40,7 @@ int coordenaValida(int l, int c){
         return 0;
     }
 }
-int quantMinasVizinhas(int l, int c, Celula campo[TamC][TamL]){
+int quantMinasVizinhas(int l, int c, Celula campo[TamL][TamC]){
     int quantMina = 0;
     if(coordenaValida(l - 1, c) && campo[l-1][c].eMina){ //vertical
         quantMina ++;
@@ -68,6 +69,9 @@ int quantMinasVizinhas(int l, int c, Celula campo[TamC][TamL]){
     return quantMina;
 }
 
+
+
+// não sei se é a função correta
 void preencherVizinhos(Celula campo[TamL][TamC]){
     for(int l = 0; l < TamL; l++){
         for (int c = 0; c < TamC; c++){
@@ -115,6 +119,16 @@ void exibirCampoAtual(Celula campo[TamL][TamC]){
         printf("\t  -----------------------------------------------------------------------------------------------------\n");
         printf("\t%d |", i);
         for(int j=0; j<TamC; j++){ 
+            if(verificaVitoria(campo) == 0){
+                if(campo[i][j].eMina)
+                        printf(" *  |");
+                if(campo[i][j].posAberta){ 
+                    printf(" %d  |", campo[i][j].vizinhos); 
+            }
+            else{
+                printf("    |");
+            }
+            }
             if(campo[i][j].posAberta){
                 if(campo[i][j].eMina)
                     printf(" *  |");
@@ -130,6 +144,7 @@ void exibirCampoAtual(Celula campo[TamL][TamC]){
     }
     printf("\t  -----------------------------------------------------------------------------------------------------\n");
 }
+
 
 void jogar(Celula campo[TamL][TamC]){
     int linha, coluna, escolha=1, i=0;
@@ -150,7 +165,7 @@ void jogar(Celula campo[TamL][TamC]){
                 printf("\n------Opção Inválida!------\n");
                 printf("  ---Digite novamente!---\n");
             }
-        }while(escolha > 3 || escolha < 1);
+        }while(escolha !=1 && escolha != 2 && escolha != 3);
 
         if(escolha == 1){
             do{
