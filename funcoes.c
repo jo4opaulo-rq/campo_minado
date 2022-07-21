@@ -134,11 +134,9 @@ void exibirCampoAtual(Celula campo[TamL][TamC]){
     printf("\t  -----------------------------------------------------------------------------------------------------\n");
 }
 
-void jogar(Celula campo[TamL][TamC]){
+void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim){
     int linha, coluna, escolha=1, i=0;
-    time_t inicio;
-    time_t meio;
-    time_t fim;
+    
 
     exibirCampoAtual(campo);
     do{
@@ -165,17 +163,17 @@ void jogar(Celula campo[TamL][TamC]){
             }
             }while(coordenaValida(linha, coluna) == 0 || campo[linha][coluna].posAberta == 1);
         }
-        if(i<1)
-            inicio = time(NULL);
+        if(i<1){
+            *inicio = time(NULL);
             i++;
-
+        }
         if(escolha == 2){
             
         }
 
         if(escolha == 3){
-            meio = time(NULL);
-            printf("Tempo: %ld Segundos\n", (meio - inicio));
+            *meio = time(NULL);
+            printf("Tempo: %ld Segundos\n", (*meio - *inicio));
 
         }
         abrirCoordenada(linha, coluna, campo);
@@ -191,8 +189,8 @@ void jogar(Celula campo[TamL][TamC]){
         printf("\n\n\tGANHOU!\n");
     }
 
-    fim = time(NULL);
-    printf("Tempo Total Jogado: %ld Segundos\n", (fim - inicio));
+    *fim = time(NULL);
+    printf("\tTempo Total Jogado: %ld Segundos\n", (fim - inicio));
 }
 
 void rankingTempos(){

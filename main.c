@@ -10,6 +10,9 @@
 
 int main(){
     Celula campo[10][20];
+    time_t inicio;
+    time_t meio;
+    time_t fim;
     
     int modoJogo;
     int opcao;
@@ -25,7 +28,7 @@ int main(){
                 inicializarCampo(campo);
                 gerarMinas(campo);
                 preencherVizinhos(campo);
-                jogar(campo);
+                jogar(campo, &inicio, &meio, &fim);
 
                 do{
                     printf("\n1- Jogar Novamente: ");
