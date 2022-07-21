@@ -41,16 +41,28 @@ int coordenaValida(int l, int c){
 }
 int quantMinasVizinhas(int l, int c, Celula campo[TamC][TamL]){
     int quantMina = 0;
-    if(coordenaValida(l - 1, c) && campo[l-1][c].eMina){
+    if(coordenaValida(l - 1, c) && campo[l-1][c].eMina){ //vertical
         quantMina ++;
     }
-    if(coordenaValida(l + 1, c) && campo[l+1][c].eMina){
+    if(coordenaValida(l + 1, c) && campo[l+1][c].eMina){ //vertical
         quantMina ++;
     }
-    if(coordenaValida(l, c + 1) && campo[l][c+1].eMina){
+    if(coordenaValida(l, c + 1) && campo[l][c+1].eMina){ //horizontal
         quantMina ++;
     }
-    if(coordenaValida(l, c - 1) && campo[l][c-1].eMina){
+    if(coordenaValida(l, c - 1) && campo[l][c-1].eMina){ //horizontal
+        quantMina ++;
+    }
+    if(coordenaValida(l - 1, c - 1) && campo[l-1][c-1].eMina){ //Diagonais
+        quantMina ++;
+    }
+    if(coordenaValida(l - 1, c + 1) && campo[l-1][c+1].eMina){ //Diagonais
+        quantMina ++;
+    }
+    if(coordenaValida(l + 1, c - 1) && campo[l+1][c-1].eMina){ //Diagonais
+        quantMina ++;
+    }
+    if(coordenaValida(l + 1, c + 1) && campo[l+1][c+1].eMina){ //Diagonais
         quantMina ++;
     }
     return quantMina;
@@ -58,9 +70,9 @@ int quantMinasVizinhas(int l, int c, Celula campo[TamC][TamL]){
 
 void preencherVizinhos(Celula campo[TamL][TamC]){
     for(int l = 0; l < TamL; l++){
-        for (int c = 0; c < TamC; c++)
+        for (int c = 0; c < TamC; c++){
             campo[l][c].vizinhos = quantMinasVizinhas(l, c, campo);
-
+        }
         
     }
 }
@@ -89,25 +101,24 @@ int verificaVitoria(Celula campo[TamC][TamL]){
     return n;
 }
 
-void exibirCampoAtual(int l, int c, Celula campo[l][c]){
+void exibirCampoAtual(Celula campo[TamL][TamC]){
     printf("\n\n\t   ");
-    for(int i=0; i<c; i++)
+    for(int i=0; i<TamC; i++)
         if(i < 10)
             printf(" %d  |", i);
         else if(i<19)   
             printf(" %d |", i);
-        else        
+        else  
             printf(" %d ", i);
     printf("\n");
-
-    for(int i=0; i<l; i++){
+    for(int i=0; i<TamL; i++){
         printf("\t  -----------------------------------------------------------------------------------------------------\n");
         printf("\t%d |", i);
-        for(int j=0; j<c; j++){ 
+        for(int j=0; j<TamC; j++){ 
             if(campo[i][j].posAberta){
                 if(campo[i][j].eMina)
-                    printf(" \U0001f4a3  |");
-                else if(campo[i][j].vizinhos)
+                    printf(" *  |");
+                else   
                     printf(" %d  |", campo[i][j].vizinhos); 
 
             }
@@ -117,7 +128,6 @@ void exibirCampoAtual(int l, int c, Celula campo[l][c]){
         }
         printf("\n");
     }
-
     printf("\t  -----------------------------------------------------------------------------------------------------\n");
 }
 
@@ -127,7 +137,7 @@ void jogar(Celula campo[TamL][TamC]){
     time_t meio;
     time_t fim;
 
-    exibirCampoAtual(TamL, TamC, campo);
+    exibirCampoAtual(campo);
     do{
         do{
             printf("\nEscolha o que deseja fazer: \n");
@@ -165,15 +175,15 @@ void jogar(Celula campo[TamL][TamC]){
 
         }
         abrirCoordenada(linha, coluna, campo);
-        exibirCampoAtual(TamL, TamC, campo);
+        exibirCampoAtual(campo);
     }while(verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
     
     if(campo[linha][coluna].eMina == 1){
-        exibirCampoAtual(TamL, TamC, campo);
+        exibirCampoAtual(campo);
         printf("\n\n\tPERDEU!\n");
     }
     else{
-        exibirCampoAtual(TamL, TamC, campo);
+        exibirCampoAtual(campo);
         printf("\n\n\tGANHOU!\n");
     }
 
