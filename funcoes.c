@@ -147,7 +147,7 @@ void jogar(Celula campo[TamL][TamC]){
             printf("1- Revelar uma célula\n");
             printf("2- Pedir ajuda\n");
             printf("3- Mostrar tempo decorrido\n");
-            printf("Opção: ");
+            printf("\nOpção: ");
             scanf("%d", &escolha);
             if(escolha > 3 || escolha < 1){
                 printf("\n------Opção Inválida!------\n");

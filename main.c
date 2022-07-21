@@ -18,7 +18,7 @@ int main(){
         printf("\n\nEscolha o modo de jogo:\n");
         printf("1- Modo clássico\n");
         printf("2- Modo autônomo\n");
-        printf("Modo: ");
+        printf("\nModo: ");
         scanf("%d", &modoJogo);
         if(modoJogo == 1){
             do{
@@ -27,14 +27,22 @@ int main(){
                 preencherVizinhos(campo);
                 jogar(campo);
 
-                printf("\n1- Jogar Novamente: ");
-                printf("\n2- Mostrar Ranking\n");
-                printf("3- Trocar Modo\n");
-                printf("4- Sair\n");
-                printf("Opção: ");
-                scanf("%d", &opcao);
-
-            }while(opcao != 4 && opcao !=3);
+                do{
+                    printf("\n1- Jogar Novamente: ");
+                    printf("\n2- Mostrar Ranking\n");
+                    printf("3- Trocar Modo\n");
+                    printf("4- Sair\n");
+                    printf("\nOpção: ");
+                    scanf("%d", &opcao);
+                    if(opcao == 2){
+                        printf("\nSeus tempo:\n");
+                        printf("Under construction\n");
+                    }
+                    if(opcao == 4){
+                        printf("\nObrigado por jogar\n");
+                    }
+                }while(opcao == 2);
+            }while(opcao != 4 && opcao != 3);
             
         }
         if(modoJogo == 2){
