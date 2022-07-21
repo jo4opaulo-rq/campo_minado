@@ -28,6 +28,7 @@ int main(){
 
             printf("\nDigite 1 para jogar novamente: ");
             printf("\nDigite 2 para pedir ajuda: \n");
+            printf("\nDigite 2 para pedir ajuda: \n");
             scanf("%d", &opcao);
         }while(opcao == 1);
           

@@ -119,22 +119,11 @@ void exibirCampoAtual(Celula campo[TamL][TamC]){
         printf("\t  -----------------------------------------------------------------------------------------------------\n");
         printf("\t%d |", i);
         for(int j=0; j<TamC; j++){ 
-            if(verificaVitoria(campo) == 0){
-                if(campo[i][j].eMina)
-                        printf(" *  |");
-                if(campo[i][j].posAberta){ 
-                    printf(" %d  |", campo[i][j].vizinhos); 
-            }
-            else{
-                printf("    |");
-            }
-            }
             if(campo[i][j].posAberta){
                 if(campo[i][j].eMina)
                     printf(" *  |");
                 else   
                     printf(" %d  |", campo[i][j].vizinhos); 
-
             }
             else{
                 printf("    |");
@@ -184,9 +173,10 @@ void jogar(Celula campo[TamL][TamC]){
         if(escolha == 2){
             
         }
+
         if(escolha == 3){
             meio = time(NULL);
-            printf("Tempo Total: %ld Segundos\n", (meio - inicio));
+            printf("Tempo: %ld Segundos\n", (meio - inicio));
 
         }
         abrirCoordenada(linha, coluna, campo);
