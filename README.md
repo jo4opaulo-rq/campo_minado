@@ -18,10 +18,9 @@ Projeto final da disciplina de introdução às técnicas de programação. <a h
 </p>
 ## Running
 1º passo
-```shell
- gcc -o main main.c funcoes.c constantes.c
-```
+
+ ```gcc -o main main.c funcoes.c constantes.c```
+
 2º Passo
-```shell
-./main
-```
+
+```./main```
