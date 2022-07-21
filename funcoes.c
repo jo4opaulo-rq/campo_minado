@@ -125,6 +125,7 @@ void jogar(Celula campo[TamL][TamC]){
     int linha, coluna, escolha=1, i=0;
     time_t inicio;
     time_t meio;
+    time_t fim;
 
     exibirCampoAtual(TamL, TamC, campo);
     do{
@@ -176,6 +177,6 @@ void jogar(Celula campo[TamL][TamC]){
         printf("\n\n\tGANHOU!\n");
     }
 
-    time_t fim = time(NULL);
+    fim = time(NULL);
     printf("Tempo Total: %ld Segundos\n", (fim - inicio));
 }
