@@ -18,7 +18,7 @@ Projeto final da disciplina de introdução às técnicas de programação. <a h
 </p>
 
 ## Running
-1º passo
+1º Passo
 
  ```gcc -o main main.c funcoes.c constantes.c```
 
