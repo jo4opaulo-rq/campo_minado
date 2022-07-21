@@ -195,3 +195,6 @@ void jogar(Celula campo[TamL][TamC]){
     printf("Tempo Total Jogado: %ld Segundos\n", (fim - inicio));
 }
 
+void rankingTempos(){
+    
+}
