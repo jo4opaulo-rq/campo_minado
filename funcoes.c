@@ -193,5 +193,5 @@ void jogar(Celula campo[TamL][TamC]){
     }
 
     fim = time(NULL);
-    printf("Tempo Total: %ld Segundos\n", (fim - inicio));
+    printf("Tempo Total Jogado: %ld Segundos\n", (fim - inicio));
 }
