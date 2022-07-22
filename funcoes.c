@@ -149,7 +149,7 @@ void exibirCampoAtual(Celula campo[TamL][TamC])
             if (campo[i][j].posAberta)
             {
                 if (campo[i][j].eMina)
-                    printf(" *  |");
+                    printf(" \U0001f4a3  |");
                 else
                     printf(" %d  |", campo[i][j].vizinhos);
             }
@@ -163,14 +163,28 @@ void exibirCampoAtual(Celula campo[TamL][TamC])
     printf("\t  -----------------------------------------------------------------------------------------------------\n");
 }
 
- void registro(int n, char nome[n]){
+ void registro(long *tempo){
     FILE *arquivo;
-    char espaco[255] = "|";
-    arquivo = fopen("registro.md", "a");
-    fprintf(arquivo, "%s", espaco);
+    char nome[50];
+    char org2[255] = "           ";
+    char org[255] = "|        ";
+    
+   printf("\nDigite seu primeiro nome: ");
+   scanf("%s", nome);
+
+    arquivo = fopen("registro.txt", "a");
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%s", org);
     fprintf(arquivo, "%s", nome);
-    fprintf(arquivo, "%s", espaco);
-    //fprintf(arquivo, "%ld", *tempo);
+    fprintf(arquivo, "%s", org2);
+    fprintf(arquivo, "%s", org);
+    
+    fprintf(arquivo, "%ld", *tempo);
+    fprintf(arquivo, "%s", "seg");
+    fprintf(arquivo, "%s", org2);
+    fprintf(arquivo, "%s", org);
+    
+    
     fclose(arquivo);
 }
 
@@ -184,12 +198,12 @@ void ajudar(Celula campo[TamL][TamC])
     srand(time(NULL));
     linha = rand() % 10;
     coluna = rand() % 20;
-    
-    if (campo[linha][coluna].posAberta == 0 && campo[linha][coluna].vizinhos <= 2)
+
+    if (campo[linha][coluna].posAberta == 0 && campo[linha][coluna].vizinhos < 2)
     {
         vet[0] = linha;
         vet[1] = coluna;
-        printf("\n-----Digite a coordenada [%d-%d]-----", vet[0], vet[1]);
+        printf("Digite a coordenada [%d-%d]", vet[0], vet[1]);
     }
     else
         ajudar(campo);
@@ -218,20 +232,7 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
                 printf("\n------Opção Inválida!------\n");
                 printf("  ---Digite novamente!---\n");
             }
-            if (escolha == 2)
-            {
-                ajudar(campo);
-            }
-            if (escolha == 3)
-            {
-                if(i > 0){
-                    *meio = time(NULL);
-                    printf("Tempo: %ld Segundos\n", (*meio - *inicio));
-                }
-                else
-                    printf("\n---O tempo só é exibido após a primeira jogada---\n");
-            }
-        } while ((escolha != 1 && escolha != 2 && escolha != 3) || escolha == 2 || escolha == 3);
+        } while (escolha != 1 && escolha != 2 && escolha != 3);
 
         if (escolha == 1)
         {
@@ -240,20 +241,26 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
                 printf("\nDigite o número da linha e da coluna: ");
                 scanf("%d %d", &linha, &coluna);
 
-                if (coordenaValida(linha, coluna))
-                {
-                    if (i < 1)
-                    {
-                        *inicio = time(NULL);
-                        i++;
-                    }
-                }
-
                 if (coordenaValida(linha, coluna) == 0)
                 {
                     printf("\nCoordenada inválida\n");
                 }
             } while (coordenaValida(linha, coluna) == 0 || campo[linha][coluna].posAberta == 1);
+        }
+        if (i < 1)
+        {
+            *inicio = time(NULL);
+            i++;
+        }
+        if (escolha == 2)
+        {
+            ajudar(campo);
+        }
+
+        if (escolha == 3)
+        {
+            *meio = time(NULL);
+            printf("Tempo: %ld Segundos\n", (*meio - *inicio));
         }
         abrirCoordenada(linha, coluna, campo);
         exibirCampoAtual(campo);
@@ -266,6 +273,8 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
     {
         exibirCampoAtual(campo);
         printf("\n\n\tPERDEU!\n");
+        
+        registro(&total); // remover depois, para teste
     }
     else
     {

@@ -36,8 +36,7 @@ int main()
                 preencherVizinhos(campo);
                 jogar(campo, &inicio, &meio, &fim);
                 printf("\nDigite seu primeiro nome: ");
-                scanf("%s", nome);
-                registro(50, nome);
+                
 
                 do
                 {
