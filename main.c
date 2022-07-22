@@ -50,7 +50,7 @@ int main()
                     if (opcao == 2)
                     {
                         printf("\nSeus tempo:\n");
-                        printf("Under construction\n");
+                        imprimir_registro();
                     }
                     if (opcao == 4)
                     {

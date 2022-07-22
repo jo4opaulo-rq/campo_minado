@@ -188,6 +188,17 @@ void exibirCampoAtual(Celula campo[TamL][TamC])
     
     fclose(arquivo);
 }
+char imprimir_registro(){
+    FILE *arquivo;
+    char texto_arquivo[255];
+    arquivo = fopen("registro.txt", "r");
+
+    while (fgets(texto_arquivo, 255, arquivo) != NULL);
+    printf("%s", texto_arquivo);
+    printf("\n");
+    fclose(arquivo);
+    
+}
 
 void ajudar(Celula campo[TamL][TamC])
 {
