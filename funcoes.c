@@ -19,10 +19,10 @@ void inicializarCampo(Celula campo[TamL][TamC])
         }
     }
 }
-
+//Gera aleatoriamente as minas do campo
 void gerarMinas(Celula campo[TamL][TamC])
 {
-    srand(time(NULL));
+    srand(time(NULL)); //Inicializa o gerador de números aleatórios com o valor da função time(NULL)
     int linha;
     int coluna;
 
@@ -30,11 +30,11 @@ void gerarMinas(Celula campo[TamL][TamC])
     {
         linha = rand() % 10;
         coluna = rand() % 20;
-        if (campo[linha][coluna].eMina == 0)
+        if (campo[linha][coluna].eMina == 0) //Verifica se a coordenada já possui uma mina
         {
             campo[linha][coluna].eMina = 1;
         }
-        else
+        else 
             i--;
     }
 }
@@ -50,6 +50,7 @@ int coordenaValida(int l, int c)
         return 0;
     }
 }
+// Conta a quantidade minas vizinhas de forma recursiva
 int quantMinasVizinhas(int l, int c, Celula campo[TamL][TamC])
 {
     int quantMina = 0;
@@ -88,7 +89,7 @@ int quantMinasVizinhas(int l, int c, Celula campo[TamL][TamC])
     return quantMina;
 }
 
-// não sei se é a função correta
+// Faz o preenchimento do campo vizinhos de acordo com a quantidades de minas ao redor
 void preencherVizinhos(Celula campo[TamL][TamC])
 {
     for (int l = 0; l < TamL; l++)
@@ -102,7 +103,7 @@ void preencherVizinhos(Celula campo[TamL][TamC])
 
 void abrirCoordenada(int l, int c, Celula campo[TamL][TamC])
 {
-    if (coordenaValida(l, c) == 1 && campo[l][c].posAberta == 0)
+    if (coordenaValida(l, c) == 1 && campo[l][c].posAberta == 0) //
     {
         campo[l][c].posAberta = 1;
         if (campo[l][c].vizinhos == 0)
@@ -135,7 +136,7 @@ int verificaVitoria(Celula campo[TamC][TamL])
 void exibirCampoAtual(Celula campo[TamL][TamC])
 {
     printf("\n\n\t   ");
-    for (int i = 0; i < TamC; i++)
+    for (int i = 0; i < TamC; i++) //Imprime a quantidade colunas
         if (i < 10)
             printf(" %d  |", i);
         else if (i < 19)
@@ -146,19 +147,19 @@ void exibirCampoAtual(Celula campo[TamL][TamC])
     for (int i = 0; i < TamL; i++)
     {
         printf("\t  -----------------------------------------------------------------------------------------------------\n");
-        printf("\t%d |", i);
+        printf("\t%d |", i); //Imprime a quantidade de linhas, indo de 0 a 19
         for (int j = 0; j < TamC; j++)
         {
-            if (campo[i][j].posAberta)
+            if (campo[i][j].posAberta) //Imprime a mina ou um vizinho apenas se a posição estiver revelada
             {
                 if (campo[i][j].eMina)
-                    printf(" \U0001f4a3  |");
+                    printf(" \U0001f4a3  |"); //Figurinha da bomba
                 else
                     printf(" %d  |", campo[i][j].vizinhos);
             }
             else
             {
-                printf("    |");
+                printf("    |"); // imprime apenas espaços caso a posição esteja fechada
             }
         }
         printf("\n");
@@ -344,7 +345,7 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim, 
     if (campo[linha][coluna].eMina == 1)
     {
         exibirCampoAtual(campo);
-        printf("\n\n\t------PERDEU!------\n");
+        printf("\n\n\t     ------PERDEU!------\n");
         printf("\n\t---Tempo Total: %.0f Segundos---\n", total);
         registro(total);
     }
@@ -353,6 +354,7 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim, 
         exibirCampoAtual(campo);
         printf("\n\n\tGANHOU!\n");
         printf("\nDigite seu primeiro nome: ");
+         printf("\n\t---Tempo Total: %.0f Segundos---\n", total);
         registro(total);
     }
     
