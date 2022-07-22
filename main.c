@@ -54,16 +54,17 @@ int main()
                     }
                     if (opcao == 4)
                     {
-                        printf("\nObrigado por jogar\n");
+                        printf("\n\t\t------Obrigado por jogar------\n\n");
                     }
                 } while (opcao == 2);
             } while (opcao != 4 && opcao != 3);
         }
         if (modoJogo == 2)
         {
+            
         }
 
-    } while (opcao != 4 && (opcao > 1 && opcao < 5));
+    } while (opcao != 4 && (opcao > 1 && opcao < 5) && (modoJogo > 1 && opcao < 3));
 
     // gcc -o main main.c funcoes.c constantes.c
     return 0;
