@@ -134,7 +134,7 @@ void exibirCampoAtual(Celula campo[TamL][TamC]){
     printf("\t  -----------------------------------------------------------------------------------------------------\n");
 }
 
-void registro(int n, char nome[n]){ 
+// void registro(int n, char nome[n]){ 
 //     FILE *arquivo;
 //     char espaco[255] = "|";
 //     arquivo = fopen("registro.md", "a");
@@ -142,12 +142,30 @@ void registro(int n, char nome[n]){
 //     fprintf(arquivo, "%s", nome);
 //     fprintf(arquivo, "%s", espaco);
 //     //fprintf(arquivo, "%ld", *tempo);
-}
+// }
 
-int ajudar(Celula campo){
-    int vet[2];
+void ajudar(Celula campo[TamL][TamC]){
+    int *vet;
+    vet = malloc (2 * sizeof (int));
     
+    int linha;
+    int coluna;
+    srand(time(NULL));
+    linha = rand() % 10;  
+    coluna = rand() % 20; 
 
+    if(campo[linha][coluna].posAberta == 0 && campo[linha][coluna].vizinhos < 2){
+        vet[0] = linha;
+        vet[1] = coluna;
+        printf("Digite a coordenada [%d-%d]", vet[0], vet[1]);
+    }
+    else
+        ajudar(campo);
+    
+    
+    free(vet);
+
+    
 }
 
 void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim){
@@ -185,7 +203,7 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim){
             i++;
         }
         if(escolha == 2){
-            
+            ajudar(campo);
         }
 
         if(escolha == 3){
@@ -203,8 +221,8 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim){
     if(campo[linha][coluna].eMina == 1){
         exibirCampoAtual(campo);
         printf("\n\n\tPERDEU!\n");
-        scanf("%s", nome);
-        registro(50, nome);
+        //scanf("%s", nome);
+        //registro(50, nome);
     }
     else{
         exibirCampoAtual(campo);
