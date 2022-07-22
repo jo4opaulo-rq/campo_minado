@@ -253,9 +253,9 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
     int linha, coluna, escolha = 1, i = 0;
     time_t total;
 
-    exibirCampoAtual(campo);
     do
     {
+        exibirCampoAtual(campo);
         do
         {
             printf("\nEscolha o que deseja fazer: \n");
@@ -304,7 +304,6 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
             printf("Tempo: %ld Segundos\n", (*meio - *inicio));
         }
         abrirCoordenada(linha, coluna, campo);
-        exibirCampoAtual(campo);
     } while (verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
 
     *fim = time(NULL);
