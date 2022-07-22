@@ -253,7 +253,7 @@ void modoAutonomo(Celula campo[TamL][TamC])
     else
     {
         exibirCampoAtual(campo);
-        printf("\n\n\t------O BOT GANHOU!------\n");
+        printf("\n\n\t------O BOT GANHOU!------\n");    
         //scanf("%s", nome);
         //registro(50, nome);
     }
@@ -264,9 +264,9 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
     int linha, coluna, escolha = 1, i = 0;
     time_t total;
 
-    exibirCampoAtual(campo);
     do
     {
+        exibirCampoAtual(campo);
         do
         {
             printf("\nEscolha o que deseja fazer: \n");
@@ -291,7 +291,11 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
 
                 if (coordenaValida(linha, coluna) == 0)
                 {
-                    printf("\nCoordenada inválida\n");
+                    printf("\nCoordenada inválida!\n");
+                }
+                if (campo[linha][coluna].posAberta == 1)
+                {
+                    printf("\nCoordenada Já foi aberta!\n");
                 }
             } while (coordenaValida(linha, coluna) == 0 || campo[linha][coluna].posAberta == 1);
         }
@@ -311,7 +315,6 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
             printf("Tempo: %ld Segundos\n", (*meio - *inicio));
         }
         abrirCoordenada(linha, coluna, campo);
-        exibirCampoAtual(campo);
     } while (verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
 
     *fim = time(NULL);
