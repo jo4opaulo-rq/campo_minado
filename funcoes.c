@@ -4,8 +4,8 @@
 #include <unistd.h>
 
 #include "constantes.h"
-
 #include "estruturas.h"
+
 // Inicializa todas as estruturas do como com o valor 0
 void inicializarCampo(Celula campo[TamL][TamC])
 {
@@ -19,10 +19,10 @@ void inicializarCampo(Celula campo[TamL][TamC])
         }
     }
 }
-//Gera aleatoriamente as minas do campo
+// Gera aleatoriamente as minas do campo
 void gerarMinas(Celula campo[TamL][TamC])
 {
-    srand(time(NULL)); //Inicializa o gerador de números aleatórios com o valor da função time(NULL)
+    srand(time(NULL)); // Inicializa o gerador de números aleatórios com o valor da função time(NULL)
     int linha;
     int coluna;
 
@@ -30,11 +30,11 @@ void gerarMinas(Celula campo[TamL][TamC])
     {
         linha = rand() % 10;
         coluna = rand() % 20;
-        if (campo[linha][coluna].eMina == 0) //Verifica se a coordenada já possui uma mina
+        if (campo[linha][coluna].eMina == 0) // Verifica se a coordenada já possui uma mina
         {
             campo[linha][coluna].eMina = 1;
         }
-        else 
+        else
             i--;
     }
 }
@@ -108,10 +108,14 @@ void abrirCoordenada(int l, int c, Celula campo[TamL][TamC])
         campo[l][c].posAberta = 1;
         if (campo[l][c].vizinhos == 0)
         {
-            abrirCoordenada(l - 1, c, campo);
-            abrirCoordenada(l + 1, c, campo);
-            abrirCoordenada(l, c - 1, campo);
-            abrirCoordenada(l, c + 1, campo);
+            abrirCoordenada(l - 1, c, campo); //Vertical
+            abrirCoordenada(l + 1, c, campo); //Vertical
+            abrirCoordenada(l, c - 1, campo); //Horizontal
+            abrirCoordenada(l, c + 1, campo); //Horizontal
+            abrirCoordenada(l - 1, c - 1, campo); //Diagonal
+            abrirCoordenada(l - 1, c + 1, campo); //Diagonal
+            abrirCoordenada(l + 1, c - 1, campo); //Diagonal 
+            abrirCoordenada(l + 1, c + 1, campo); //Diagonal
         }
     }
 }
@@ -131,12 +135,10 @@ int verificaVitoria(Celula campo[TamC][TamL])
     return n;
 }
 
-
-
 void exibirCampoAtual(Celula campo[TamL][TamC])
 {
     printf("\n\n\t   ");
-    for (int i = 0; i < TamC; i++) //Imprime a quantidade colunas
+    for (int i = 0; i < TamC; i++) // Imprime a quantidade colunas
         if (i < 10)
             printf(" %d  |", i);
         else if (i < 19)
@@ -147,13 +149,13 @@ void exibirCampoAtual(Celula campo[TamL][TamC])
     for (int i = 0; i < TamL; i++)
     {
         printf("\t  -----------------------------------------------------------------------------------------------------\n");
-        printf("\t%d |", i); //Imprime a quantidade de linhas, indo de 0 a 19
+        printf("\t%d |", i); // Imprime a quantidade de linhas, indo de 0 a 19
         for (int j = 0; j < TamC; j++)
         {
-            if (campo[i][j].posAberta) //Imprime a mina ou um vizinho apenas se a posição estiver revelada
+            if (campo[i][j].posAberta) // Imprime a mina ou um vizinho apenas se a posição estiver revelada
             {
                 if (campo[i][j].eMina)
-                    printf(" \U0001f4a3  |"); //Figurinha da bomba
+                    printf(" \U0001f4a3 |"); // Figurinha da bomba
                 else
                     printf(" %d  |", campo[i][j].vizinhos);
             }
@@ -169,8 +171,8 @@ void exibirCampoAtual(Celula campo[TamL][TamC])
 
 void ajudar(Celula campo[TamL][TamC])
 {
-    int *vet;
-    vet = malloc(2 * sizeof(int));
+    int *vet; //Cria um ponteiros
+    vet = malloc(2 * sizeof(int)); //Aloca dois espaços de memória na variável vet
 
     int linha;
     int coluna;
@@ -178,7 +180,7 @@ void ajudar(Celula campo[TamL][TamC])
     linha = rand() % 10;
     coluna = rand() % 20;
 
-    if (campo[linha][coluna].posAberta == 0 && campo[linha][coluna].vizinhos < 2)
+    if (campo[linha][coluna].posAberta == 0 && campo[linha][coluna].vizinhos < 2) 
     {
         vet[0] = linha;
         vet[1] = coluna;
@@ -194,8 +196,9 @@ void modoAutonomo(Celula campo[TamL][TamC])
 {
     int linha;
     int coluna;
+    int i=0;
     srand(time(NULL));
-
+    
     do
     {
         exibirCampoAtual(campo);
@@ -204,13 +207,9 @@ void modoAutonomo(Celula campo[TamL][TamC])
         linha = rand() % 10;
         coluna = rand() % 20;
 
-        if(campo[linha][coluna].posAberta == 0 && campo[linha][coluna].vizinhos < 8){
-            abrirCoordenada(linha, coluna, campo);
-        }
-        else
-            modoAutonomo(campo);
-
-    }while(verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
+        abrirCoordenada(linha, coluna, campo);
+        
+    } while (verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
 
     if (campo[linha][coluna].eMina == 1)
     {
@@ -220,60 +219,51 @@ void modoAutonomo(Celula campo[TamL][TamC])
     else
     {
         exibirCampoAtual(campo);
-        printf("\n\n\t------O BOT GANHOU!------\n");    
-        //scanf("%s", nome);
-        //registro(50, nome);
+        printf("\n\n\t------O BOT GANHOU!------\n");
     }
 }
 
- void registro(double total){
+void registro(double total)
+{
     FILE *arquivo;
     char nome[50];
     char barra[3] = "\0";
     char espaco[255] = "                ";
     char espaco2[255] = "            ";
 
-   printf("\nDigite seu primeiro nome: ");
-   scanf("%s", nome);
+    printf("\nDigite seu primeiro nome: ");
+    scanf("%s", nome);
 
     arquivo = fopen("registro.txt", "a");
     fprintf(arquivo, "\n");
-    
+
     fprintf(arquivo, "%s", espaco);
 
     fprintf(arquivo, "%s", nome);
     fprintf(arquivo, "%s", espaco);
     fprintf(arquivo, "%s", espaco2);
-    
-    
+
     fprintf(arquivo, "%.0f", total);
     fprintf(arquivo, "%s", "s");
-   
 
     fclose(arquivo);
 }
 
-char imprimir_registro(){
+char imprimir_registro()
+{
     FILE *arquivo;
     char texto_arquivo[255];
     char texto;
     arquivo = fopen("registro.txt", "r");
 
-    // while (fgets(texto_arquivo, 255, arquivo) != NULL);
-    // printf("%s", texto_arquivo);
-    // printf("\n");
-    // fclose(arquivo);
-
     do
-  {  
-      //faz a leitura do caracter no arquivo apontado por pont_arq
-      texto = fgetc(arquivo);
-      
-      //exibe o caracter lido na tela
-      printf("%c" , texto);        
-  }while (texto != EOF);//enquanto não for final de arquivo
-  printf("\n");
-    
+    {
+
+        texto = fgetc(arquivo);
+
+        printf("%c", texto);
+    } while (texto != EOF); 
+    printf("\n");
 }
 
 void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim, float total)
@@ -299,14 +289,17 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim, 
             if (escolha == 2)
             {
                 ajudar(campo);
+
             }
 
             if (escolha == 3)
             {
-                if(i < 1){
+                if (i < 1)
+                {
                     printf("\n---O tempo só inicia depois da primeira jogada!---\n");
                 }
-                else{
+                else
+                {
                     *meio = time(NULL);
                     printf("\n\t---Tempo: %ld Segundos---\n", (*meio - *inicio));
                 }
@@ -347,15 +340,12 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim, 
         exibirCampoAtual(campo);
         printf("\n\n\t     ------PERDEU!------\n");
         printf("\n\t---Tempo Total: %.0f Segundos---\n", total);
-        registro(total);
     }
     else
     {
         exibirCampoAtual(campo);
         printf("\n\n\tGANHOU!\n");
-        printf("\nDigite seu primeiro nome: ");
-         printf("\n\t---Tempo Total: %.0f Segundos---\n", total);
+        printf("\n\t---Tempo Total: %.0f Segundos---\n", total);
         registro(total);
     }
-    
 }
