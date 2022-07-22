@@ -228,37 +228,50 @@ void modoAutonomo(Celula campo[TamL][TamC])
  void registro(double total){
     FILE *arquivo;
     char nome[50];
-    char org2[255] = "           ";
-    char org[255] = "|        ";
-    
+    char barra[3] = "\0";
+    char espaco[255] = "                ";
+    char espaco2[255] = "            ";
+
    printf("\nDigite seu primeiro nome: ");
    scanf("%s", nome);
 
     arquivo = fopen("registro.txt", "a");
     fprintf(arquivo, "\n");
-    fprintf(arquivo, "%s", org);
+    
+    fprintf(arquivo, "%s", espaco);
+
     fprintf(arquivo, "%s", nome);
-    fprintf(arquivo, "%s", org2);
-    fprintf(arquivo, "%s", org);
+    fprintf(arquivo, "%s", espaco);
+    fprintf(arquivo, "%s", espaco2);
+    
     
     fprintf(arquivo, "%.0f", total);
-    fprintf(arquivo, "%s", "seg");
-    fprintf(arquivo, "%s", org2);
-    fprintf(arquivo, "%s", org);
-    
-    
+    fprintf(arquivo, "%s", "s");
+   
+
     fclose(arquivo);
 }
 
 char imprimir_registro(){
     FILE *arquivo;
     char texto_arquivo[255];
+    char texto;
     arquivo = fopen("registro.txt", "r");
 
-    while (fgets(texto_arquivo, 255, arquivo) != NULL);
-    printf("%s", texto_arquivo);
-    printf("\n");
-    fclose(arquivo);
+    // while (fgets(texto_arquivo, 255, arquivo) != NULL);
+    // printf("%s", texto_arquivo);
+    // printf("\n");
+    // fclose(arquivo);
+
+    do
+  {  
+      //faz a leitura do caracter no arquivo apontado por pont_arq
+      texto = fgetc(arquivo);
+      
+      //exibe o caracter lido na tela
+      printf("%c" , texto);        
+  }while (texto != EOF);//enquanto não for final de arquivo
+  printf("\n");
     
 }
 
