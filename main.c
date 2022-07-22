@@ -15,11 +15,11 @@ int main()
     time_t inicio;
     time_t meio;
     time_t fim;
-    time_t total;
 
     char nome[50];
     int modoJogo;
     int opcao;
+    float total;
 
     do
     {
@@ -35,10 +35,8 @@ int main()
                 inicializarCampo(campo);
                 gerarMinas(campo);
                 preencherVizinhos(campo);
-                jogar(campo, &inicio, &meio, &fim);
-                printf("\nDigite seu primeiro nome: ");
+                jogar(campo, &inicio, &meio, &fim, total);
                 
-
                 do
                 {
                     printf("\n1- Jogar Novamente: ");

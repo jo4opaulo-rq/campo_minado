@@ -130,6 +130,8 @@ int verificaVitoria(Celula campo[TamC][TamL])
     return n;
 }
 
+
+
 void exibirCampoAtual(Celula campo[TamL][TamC])
 {
     printf("\n\n\t   ");
@@ -164,42 +166,6 @@ void exibirCampoAtual(Celula campo[TamL][TamC])
     printf("\t  -----------------------------------------------------------------------------------------------------\n");
 }
 
- void registro(long *tempo){
-    FILE *arquivo;
-    char nome[50];
-    char org2[255] = "           ";
-    char org[255] = "|        ";
-    
-   printf("\nDigite seu primeiro nome: ");
-   scanf("%s", nome);
-
-    arquivo = fopen("registro.txt", "a");
-    fprintf(arquivo, "\n");
-    fprintf(arquivo, "%s", org);
-    fprintf(arquivo, "%s", nome);
-    fprintf(arquivo, "%s", org2);
-    fprintf(arquivo, "%s", org);
-    
-    fprintf(arquivo, "%ld", *tempo);
-    fprintf(arquivo, "%s", "seg");
-    fprintf(arquivo, "%s", org2);
-    fprintf(arquivo, "%s", org);
-    
-    
-    fclose(arquivo);
-}
-char imprimir_registro(){
-    FILE *arquivo;
-    char texto_arquivo[255];
-    arquivo = fopen("registro.txt", "r");
-
-    while (fgets(texto_arquivo, 255, arquivo) != NULL);
-    printf("%s", texto_arquivo);
-    printf("\n");
-    fclose(arquivo);
-    
-}
-
 void ajudar(Celula campo[TamL][TamC])
 {
     int *vet;
@@ -215,7 +181,7 @@ void ajudar(Celula campo[TamL][TamC])
     {
         vet[0] = linha;
         vet[1] = coluna;
-        printf("Digite a coordenada [%d-%d]", vet[0], vet[1]);
+        printf("\n\t---Digite a coordenada [%d-%d]---\n", vet[0], vet[1]);
     }
     else
         ajudar(campo);
@@ -259,10 +225,45 @@ void modoAutonomo(Celula campo[TamL][TamC])
     }
 }
 
-void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
+ void registro(double total){
+    FILE *arquivo;
+    char nome[50];
+    char org2[255] = "           ";
+    char org[255] = "|        ";
+    
+   printf("\nDigite seu primeiro nome: ");
+   scanf("%s", nome);
+
+    arquivo = fopen("registro.txt", "a");
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%s", org);
+    fprintf(arquivo, "%s", nome);
+    fprintf(arquivo, "%s", org2);
+    fprintf(arquivo, "%s", org);
+    
+    fprintf(arquivo, "%.0f", total);
+    fprintf(arquivo, "%s", "seg");
+    fprintf(arquivo, "%s", org2);
+    fprintf(arquivo, "%s", org);
+    
+    
+    fclose(arquivo);
+}
+char imprimir_registro(){
+    FILE *arquivo;
+    char texto_arquivo[255];
+    arquivo = fopen("registro.txt", "r");
+
+    while (fgets(texto_arquivo, 255, arquivo) != NULL);
+    printf("%s", texto_arquivo);
+    printf("\n");
+    fclose(arquivo);
+    
+}
+
+void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim, float total)
 {
     int linha, coluna, escolha = 1, i = 0;
-    time_t total;
 
     do
     {
@@ -280,7 +281,22 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
                 printf("\n------Opção Inválida!------\n");
                 printf("  ---Digite novamente!---\n");
             }
-        } while (escolha != 1 && escolha != 2 && escolha != 3);
+            if (escolha == 2)
+            {
+                ajudar(campo);
+            }
+
+            if (escolha == 3)
+            {
+                if(i < 1){
+                    printf("\n---O tempo só inicia depois da primeira jogada!---\n");
+                }
+                else{
+                    *meio = time(NULL);
+                    printf("\n\t---Tempo: %ld Segundos---\n", (*meio - *inicio));
+                }
+            }
+        } while ((escolha != 1 && escolha != 2 && escolha != 3) || escolha == 2 || escolha == 3);
 
         if (escolha == 1)
         {
@@ -304,36 +320,26 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
             *inicio = time(NULL);
             i++;
         }
-        if (escolha == 2)
-        {
-            ajudar(campo);
-        }
-
-        if (escolha == 3)
-        {
-            *meio = time(NULL);
-            printf("Tempo: %ld Segundos\n", (*meio - *inicio));
-        }
         abrirCoordenada(linha, coluna, campo);
     } while (verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
 
     *fim = time(NULL);
-    total = fim - inicio;
+
+    total = difftime(*fim, *inicio);
 
     if (campo[linha][coluna].eMina == 1)
     {
         exibirCampoAtual(campo);
-        printf("\n\n\tPERDEU!\n");
-        
-        registro(&total); // remover depois, para teste
+        printf("\n\n\t------PERDEU!------\n");
+        printf("\n\t---Tempo Total: %.0f Segundos---\n", total);
+        registro(total);
     }
     else
     {
         exibirCampoAtual(campo);
         printf("\n\n\tGANHOU!\n");
         printf("\nDigite seu primeiro nome: ");
-        //scanf("%s", nome);
-        //registro(50, nome);
+        registro(total);
     }
-    printf("Tempo Total: %ld", total);
+    
 }
