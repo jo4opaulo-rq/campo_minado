@@ -163,15 +163,16 @@ void exibirCampoAtual(Celula campo[TamL][TamC])
     printf("\t  -----------------------------------------------------------------------------------------------------\n");
 }
 
-// void registro(int n, char nome[n]){
-//     FILE *arquivo;
-//     char espaco[255] = "|";
-//     arquivo = fopen("registro.md", "a");
-//     fprintf(arquivo, "%s", espaco);
-//     fprintf(arquivo, "%s", nome);
-//     fprintf(arquivo, "%s", espaco);
-//     //fprintf(arquivo, "%ld", *tempo);
-// }
+ void registro(int n, char nome[n]){
+    FILE *arquivo;
+    char espaco[255] = "|";
+    arquivo = fopen("registro.md", "a");
+    fprintf(arquivo, "%s", espaco);
+    fprintf(arquivo, "%s", nome);
+    fprintf(arquivo, "%s", espaco);
+    //fprintf(arquivo, "%ld", *tempo);
+    fclose(arquivo);
+}
 
 void ajudar(Celula campo[TamL][TamC])
 {
@@ -200,7 +201,6 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
 {
     int linha, coluna, escolha = 1, i = 0;
     time_t total;
-    char nome[50];
 
     exibirCampoAtual(campo);
     do
@@ -259,16 +259,14 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)
     {
         exibirCampoAtual(campo);
         printf("\n\n\tPERDEU!\n");
-        // scanf("%s", nome);
-        // registro(50, nome);
     }
     else
     {
         exibirCampoAtual(campo);
         printf("\n\n\tGANHOU!\n");
         printf("\nDigite seu primeiro nome: ");
-        // scanf("%s", nome);
-        // registro(50, nome, &total);
+        //scanf("%s", nome);
+        //registro(50, nome);
     }
     printf("Tempo Total: %ld", total);
 }

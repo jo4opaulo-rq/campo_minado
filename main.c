@@ -16,6 +16,7 @@ int main()
     time_t fim;
     time_t total;
 
+    char nome[50];
     int modoJogo;
     int opcao;
 
@@ -34,6 +35,9 @@ int main()
                 gerarMinas(campo);
                 preencherVizinhos(campo);
                 jogar(campo, &inicio, &meio, &fim);
+                printf("\nDigite seu primeiro nome: ");
+                scanf("%s", nome);
+                registro(50, nome);
 
                 do
                 {
