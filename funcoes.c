@@ -249,6 +249,7 @@ void modoAutonomo(Celula campo[TamL][TamC])
     
     fclose(arquivo);
 }
+
 char imprimir_registro(){
     FILE *arquivo;
     char texto_arquivo[255];
