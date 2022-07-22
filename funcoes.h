@@ -13,5 +13,4 @@ int verificaVitoria();
 int coordenaValida();
 int quantMinasVizinhas();
 
-
 #endif
