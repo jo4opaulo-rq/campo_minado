@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "constantes.h"
 
@@ -60,7 +61,10 @@ int main()
         }
         if (modoJogo == 2)
         {
-            
+            inicializarCampo(campo);
+            gerarMinas(campo);
+            preencherVizinhos(campo);
+            modoAutonomo(campo);
         }
 
     } while (opcao != 4 && (opcao > 1 && opcao < 5) && (modoJogo > 1 && opcao < 3));

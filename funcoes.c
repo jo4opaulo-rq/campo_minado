@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "constantes.h"
 
@@ -209,6 +210,43 @@ void ajudar(Celula campo[TamL][TamC])
         ajudar(campo);
 
     free(vet);
+}
+
+void modoAutonomo(Celula campo[TamL][TamC])
+{
+    int linha;
+    int coluna;
+    srand(time(NULL));
+
+    do
+    {
+        exibirCampoAtual(campo);
+        printf("\n\n\t---BOT PENSANDO...\n\n");
+        sleep(3);
+        linha = rand() % 10;
+        coluna = rand() % 20;
+
+        if(campo[linha][coluna].posAberta == 0 && campo[linha][coluna].vizinhos < 8){
+            abrirCoordenada(linha, coluna, campo);
+        }
+        else
+            modoAutonomo(campo);
+
+    }while(verificaVitoria(campo) != 0 && campo[linha][coluna].eMina == 0);
+
+    if (campo[linha][coluna].eMina == 1)
+    {
+        exibirCampoAtual(campo);
+        printf("\n\n\t------O BOT PERDEU!\n\n------");
+    }
+    else
+    {
+        exibirCampoAtual(campo);
+        printf("\n\n\t------O BOT GANHOU!------\n");
+        printf("\nDigite seu primeiro nome: ");
+        //scanf("%s", nome);
+        //registro(50, nome);
+    }
 }
 
 void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim)

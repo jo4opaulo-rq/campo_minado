@@ -8,6 +8,7 @@ void exibirCampoAtual();
 void jogar();
 void abrirCoordenada();
 void registro();
+void modoAutonomo();
 int ajudar();
 int verificaVitoria();
 int coordenaValida();
