@@ -243,7 +243,6 @@ void modoAutonomo(Celula campo[TamL][TamC])
     {
         exibirCampoAtual(campo);
         printf("\n\n\t------O BOT GANHOU!------\n");
-        printf("\nDigite seu primeiro nome: ");
         //scanf("%s", nome);
         //registro(50, nome);
     }
