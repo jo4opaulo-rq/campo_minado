@@ -172,7 +172,7 @@ void exibirCampoAtual(Celula campo[TamL][TamC])
 void ajudar(Celula campo[TamL][TamC])
 {
     int *vet; //Cria um ponteiros
-    vet = malloc(2 * sizeof(int)); //Aloca dois espaços de memória na variável vet
+    vet = malloc(6 * sizeof(int)); 
 
     int linha;
     int coluna;
@@ -321,7 +321,7 @@ void jogar(Celula campo[TamL][TamC], time_t *inicio, time_t *meio, time_t *fim, 
                 {
                     printf("\nCoordenada Já foi aberta!\n");
                 }
-            } while (coordenaValida(linha, coluna) == 0 || campo[linha][coluna].posAberta == 1);
+            } while (coordenaValida(linha, coluna) == 0 && campo[linha][coluna].posAberta == 1);
         }
         if (i < 1)
         {

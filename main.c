@@ -65,7 +65,7 @@ int main()
             modoAutonomo(campo);
         }
 
-    } while (opcao != 4 && (opcao > 1 && opcao < 5) && (modoJogo > 1 && opcao < 3));
+    } while (opcao != 4 && (opcao > 1 && opcao < 5) );
 
     // gcc -o main main.c funcoes.c constantes.c
     return 0;
